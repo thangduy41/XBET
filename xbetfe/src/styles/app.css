@@ -1,0 +1,29 @@
+@import './base/base.css';
+
+@import './elements/link.css';
+@import './elements/button.css';
+@import './elements/input.css';
+
+@import './utils/utils.css';
+
+@import './components/container.css';
+@import './components/modal.css';
+@import './components/grid.css';
+
+.logo-app {
+    fill: #2e89ff;
+    
+}
+
+figure { overflow:hidden; border-radius:90px; background:white; }
+
+figure img { width:50px; transition:.2s ease; }
+figure img:hover { transform:scale(1.5); cursor:pointer; }
+
+.w-bg-a {
+    background-size: 50% 50% !important;
+}
+
+.w-bg-b {
+    background-size: 50% 50% !important;
+}
