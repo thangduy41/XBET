@@ -16,17 +16,14 @@ router.post(
     '/v1/post',
     isAuthenticated,
     multer.array('photos', 5),
-    validateBody(schemas.createPostSchema),
+    // validateBody(schemas.createPostSchema),
     async (req, res, next) => {
         try {
-            const { description, privacy, type_post } = req.body;
-
+            const { description, privacy, type_post, groupId, isLink } = req.body;
             let photos = [];
             if (req.files) {
                 const photosToSave = req.files.map((file) => uploadImageToStorage(file, `${req.user.username}/posts`));
                 photos = await Promise.all(photosToSave);
-
-                console.log(photos)
             }
 
             const post = new Post({
@@ -34,9 +31,11 @@ router.post(
                 // author: req.user._id,
                 description: filterWords.clean(description),
                 photos,
+                groupId: groupId,
                 privacy: privacy || 'public',
                 type_post: type_post || "",
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                isLink: isLink || false,
             });
 
             await post.save();

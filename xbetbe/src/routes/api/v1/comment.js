@@ -193,9 +193,10 @@ router.get('/v1/comment/:post_id', isAuthenticated, validateObjectID('post_id'),
             return next(ErrorHandler(404, 'No more comments.'));
         }
 
-        return res.status(200).send(makeResponseJson(agg));
+        return res.status(200).json(makeResponseJson(agg));
     } catch (e) {
         console.log(e);
+        return next(ErrorHandler(404, 'No more comments.'));
         next(e);
     }
 });

@@ -8,4 +8,5 @@ export { default as NewsFeed } from './NewsFeedSchema.js';
 export { default as Notification } from './NotificationSchema.js';
 export { default as Post } from './PostSchema.js';
 export { default as User } from './UserSchema.js';
-
+export {default as Group } from "./GroupSchema.js"
+export {default as FriendShip } from "./FriendShipSchema.js"

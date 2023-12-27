@@ -22,6 +22,11 @@ const PostSchema = new Schema({
         type: String,
         default: ""
     },
+    groupId: {
+        type: Schema.Types.ObjectId,
+        ref: "Group",
+        required: false,
+    },
     description: {
         type: String,
         default: ''
@@ -29,12 +34,24 @@ const PostSchema = new Schema({
     isEdited: {
         type: Boolean,
         default: false
+    },
+    isLink: {
+        type: Boolean,
+        default: false
     }
+    
 }, { timestamps: true, toJSON: { virtuals: true }, toObject: { getters: true, virtuals: true } });
 
 PostSchema.virtual('author', {
     ref: 'User',
     localField: '_author_id',
+    foreignField: '_id',
+    justOne: true
+});
+
+PostSchema.virtual('group', {
+    ref: 'Group',
+    localField: 'groupId',
     foreignField: '_id',
     justOne: true
 });

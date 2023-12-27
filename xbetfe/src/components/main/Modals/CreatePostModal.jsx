@@ -41,6 +41,13 @@ const CreatePostModal = (props) => {
         if(isPostVideo) {
           formData.set("type_post", "video")
         }
+        if(props?.groupId) {
+          formData.set("groupId", props?.groupId)
+        }
+        if(props?.isFromRepo) {
+          formData.set("isLink", true)
+
+        }
         formData.set("description", description);
         formData.set("privacy", privacy);
   
@@ -69,7 +76,7 @@ const CreatePostModal = (props) => {
       isOpen={props.isOpen}
       onAfterOpen={props.onAfterOpen}
       onRequestClose={props.closeModal}
-      contentLabel="Create Post"
+      contentLabel={props?.isFromRepo ? "Upload file" : "Create Post"}
       className="modal"
       // shouldCloseOnOverlayClick={!isDeleting}
       overlayClassName="modal-overlay"
@@ -82,7 +89,7 @@ const CreatePostModal = (props) => {
           <CloseOutlined className="p-2  outline-none text-gray-500 dark:text-white" />
         </div>
         <div className="w-full laptop:w-40rem p-4 laptop:px-8">
-          <h2 className="dark:text-white">Create Post</h2>
+          <h2 className="dark:text-white">{props?.isFromRepo ? "Upload file" : "Create Post"}</h2>
           <select
             className="!py-1 !text-sm w-32 dark:bg-indigo-1100 dark:text-white dark:border-gray-800"
             id="privacy"
@@ -110,56 +117,59 @@ const CreatePostModal = (props) => {
             />
             <div className="flex items-center justify-between">
               {/* --- UPLOAD OPTIONS */}
-              <div className="flex items-center gap-4">
-                <div className="flex items-center flex-grow">
-                  <input
-                    multiple
-                    type="file"
-                    hidden
-                    accept="*"
-                    onChange={onFileChange}
-                    readOnly={isLoadingCreatePost}
-                    id="photos"
-                  />
-                  <label
-                    className="inline-flex items-center cursor-pointer justify-start border-gray-200 text-gray-400 py-2 text-xs"
-                    htmlFor="photos"
-                  >
-                    <div
-                      className="group flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-400 hover:border-indigo-700"
-                      title="Upload photo"
-                    >
-                      <FileImageOutlined className="text-xl text-gray-400 hover:text-indigo-700" />
+              {
+                !props?.isFromRepo && 
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center flex-grow">
+                      <input
+                        multiple
+                        type="file"
+                        hidden
+                        accept="*"
+                        onChange={onFileChange}
+                        readOnly={isLoadingCreatePost}
+                        id="photos"
+                      />
+                      <label
+                        className="inline-flex items-center cursor-pointer justify-start border-gray-200 text-gray-400 py-2 text-xs"
+                        htmlFor="photos"
+                      >
+                        <div
+                          className="group flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-400 hover:border-indigo-700"
+                          title="Upload photo"
+                        >
+                          <FileImageOutlined className="text-xl text-gray-400 hover:text-indigo-700" />
+                        </div>
+                      </label>
                     </div>
-                  </label>
-                </div>
-                <div className="flex items-center flex-grow">
-                  <input
-                    multiple
-                    type="file"
-                    hidden
-                    // accept="image/*"
-                    onChange={onFileChange}
-                    readOnly={isLoadingCreatePost}
-                    id="photos"
-                  />
-                  <label
-                    className="inline-flex items-center cursor-pointer justify-start border-gray-200 text-gray-400 py-2 text-xs"
-                    htmlFor="photos"
-                  >
-                    <div
-                      className="group flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-400 hover:border-indigo-700"
-                      title="Upload video"
-                    >
-                      <VideoCameraOutlined className="text-xl text-gray-400 hover:text-indigo-700" />
+                    <div className="flex items-center flex-grow">
+                      <input
+                        multiple
+                        type="file"
+                        hidden
+                        // accept="image/*"
+                        onChange={onFileChange}
+                        readOnly={isLoadingCreatePost}
+                        id="photos"
+                      />
+                      <label
+                        className="inline-flex items-center cursor-pointer justify-start border-gray-200 text-gray-400 py-2 text-xs"
+                        htmlFor="photos"
+                      >
+                        <div
+                          className="group flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-400 hover:border-indigo-700"
+                          title="Upload video"
+                        >
+                          <VideoCameraOutlined className="text-xl text-gray-400 hover:text-indigo-700" />
+                        </div>
+                      </label>
                     </div>
-                  </label>
-                </div>
-              </div>
+                  </div>
+              }
               {/* ---- POST BUTTON --- */}
-              <div className="flex justify-end">
+              <div className="flex justify-end" style={{margin: "10px 0"}}>
                 <button onClick={onSubmit} disabled={isLoadingCreatePost}>
-                  Create Post
+                  {props?.isFromRepo ? "Upload file" : "Create Post"}
                 </button>
               </div>
             </div>

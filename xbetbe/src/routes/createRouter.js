@@ -9,6 +9,8 @@ import notificationRouter from "./api/v1/notification.js"
 import postRouter from "./api/v1/post.js"
 import searchRouter from "./api/v1/search.js"
 import userRouter from "./api/v1/user.js"
+import groupRouter from "./api/v1/group.js"
+import friendShipRouter from "./api/v1/friend_ship.js"
 
 
 const loadRoutes = () => {
@@ -23,6 +25,8 @@ const loadRoutes = () => {
     rootRouter.use(postRouter)
     rootRouter.use(searchRouter)
     rootRouter.use(userRouter)
+    rootRouter.use(groupRouter)
+    rootRouter.use(friendShipRouter)
     // rootRouter.use(bookmarkRouter)
 
     return rootRouter;

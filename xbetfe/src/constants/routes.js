@@ -12,5 +12,9 @@ export const PROFILE_BOOKMARKS = '/user/:username/bookmarks';
 export const SEARCH = '/search';
 export const CHAT = '/chat/:username';
 export const SUGGESTED_PEOPLE = '/suggested';
-
+export const GROUP= "/group"
+export const GROUP_DETAIL= "/group/detail/:id"
+export const RESPIRATORY= "/respiratory"
+export const FRIENDSHIP= "/friendship"
+export const REPOSITORY_GROUP= "/repository/group/:id"
 export const SOCIAL_AUTH_FAILED = '/auth/:provider/failed';

@@ -12,7 +12,7 @@ import { ProtectedRoute, PublicRoute } from "./routers";
 import { loginSuccess } from "./redux/action/authActions";
 import { checkAuthSession } from "./services/api";
 import socket from './socket/socket';
-import Chatbot from './components/main/ChatBot/ChatBot';
+// import Chatbot from './components/main/ChatBot/ChatBot';
 
 export const history = createBrowserHistory();
 
@@ -76,6 +76,13 @@ function App() {
           <Route path={ROUTE.HOME} exact render={(props) => <pages.Home key={Date.now()} {...props} />} />
           <Route path={ROUTE.WATCH} exact render={(props)=> <pages.Watch key={Date.now()} {...props} /> } />
           <ProtectedRoute path={ROUTE.POST} component={pages.Post} />
+          <Route path={ROUTE.GROUP} exact render={(props)=> <pages.Group key={Date.now()} {...props} /> } />
+          <Route path={ROUTE.FRIENDSHIP} render={(props)=> <pages.Friendship key={Date.now()} {...props} /> } />
+          <Route path={ROUTE.RESPIRATORY} exact render={(props)=> <pages.Respiratory key={Date.now()} {...props} /> } />
+          <Route path={ROUTE.REPOSITORY_GROUP} exact render={(props)=> <pages.RepositoryGroup key={Date.now()} {...props} /> } />
+
+          <Route path={ROUTE.GROUP_DETAIL} render={(props)=> <pages.GroupDetail key={Date.now()} {...props} /> } />
+
           <ProtectedRoute path={ROUTE.PROFILE} component={pages.Profile} />
           <ProtectedRoute path={ROUTE.CHAT} component={pages.Chat} />
           <ProtectedRoute path={ROUTE.SUGGESTED_PEOPLE} component={pages.SuggestedPeople} />

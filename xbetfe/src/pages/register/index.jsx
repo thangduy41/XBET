@@ -10,10 +10,11 @@ import logo from "../../images/logo-white.svg";
 import logo_dark from "../../images/logo.svg";
 import { registerStart } from "../../redux/action/authActions";
 import { setAuthErrorMessage } from "../../redux/action/errorActions";
-
+import swal from "sweetalert"
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword]= useState("")
   const [username, setUsername] = useState("");
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
@@ -43,6 +44,12 @@ const Register = () => {
     setPassword(val);
   };
 
+  const onConfirmPasswordChange= (e)=> {
+    const val= e.target.value.trim();
+    
+    setConfirmPassword(val)
+  }
+
   const onUsernameChange = (e) => {
     const val = e.target.value.trim();
 
@@ -52,8 +59,11 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (email && password && username) {
+    if (email && password && username && password === confirmPassword) {
       dispatch(registerStart({ email, password, username }));
+    }
+    else {
+      swal("Notice", "Your information is not fill or wrong", "error")
     }
   };
   return (
@@ -186,14 +196,14 @@ const Register = () => {
                   name="password"
                   type={isPasswordVisible ? "text" : "password"}
                   className={`!pr-12 ${error ? "input--error" : ""}`}
-                  onChange={onPasswordChange}
+                  onChange={onConfirmPasswordChange}
                   autoComplete="current-password"
                   required
                   minLength={8}
                   maxLength={100}
                   readOnly={isLoading}
                   placeholder="Confirm Password"
-                  value={password}
+                  value={confirmPassword}
                 />
                 <div className="absolute right-0 top-0 bottom-0 my-auto flex items-center justify-center w-12 h-12 hover:bg-gray-200 cursor-pointer rounded-tr-full rounded-br-full z-10">
                   {isPasswordVisible ? (

@@ -47,7 +47,8 @@ export const schemas = {
         description: Joi.string().allow(''),
         photos: Joi.array().items(Joi.string()),
         privacy: Joi.string().allow(''),
-        type_post: Joi.string().allow('')
+        type_post: Joi.string().allow(''),
+        groupId: Joi.string(),
     }),
 
     commentSchema: Joi.object({

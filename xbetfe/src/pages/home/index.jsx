@@ -192,7 +192,7 @@ const Home = (props) => {
           <div className="mb-8">
             <TransitionGroup component={null}>
               <div ref={infiniteRef}>
-                {state.newsFeed.items.map(
+                {state.newsFeed.items?.filter(item=> item.groupId?.length <= 0 || !item?.groupId).map(
                   (post) =>
                     post.author && ( // avoid render posts with null author
                       <CSSTransition
@@ -225,22 +225,6 @@ const Home = (props) => {
           </div>
         )}
       </div>
-      {/* --- SUGGESTED PEOPLE --- */}
-      {/* <div className="hidden laptop:block laptop:w-1/4 laptop:sticky laptop:top-20 ml-4">
-        {props.isAuth && <SuggestedPeople />}
-        new feature
-        <div style={{ marginTop: 16 }}>
-          {props?.isAuth && (
-            <>
-              <Tab.Following
-                is_page_home={true}
-                username={state.auth.username}
-              />
-            </>
-          )}
-        </div>
-      </div> */}
-      {/*  --- ALL POST MODALS (DELETE COMMENT NOT INCLUDED) --- */}
       <PostModals
         deleteSuccessCallback={deleteSuccessCallback}
         updateSuccessCallback={updateSuccessCallback}

@@ -60,6 +60,10 @@ const UserSchema = new Schema({
         type: String,
         default: new Date().toString()
     },
+    id_temporary: {
+        type: String,
+        default: null
+    },
     provider: {
         type: String,
         default: 'password',
